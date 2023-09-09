@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ template "streamvisor.fullname" . }}"
+  namespace: {{ template "streamvisor.namespace" . }}
+  labels:
+    {{- include "streamvisor.standardLabels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "streamvisor.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "streamvisor.template.labels" . | nindent 8 }}
+      annotations:
+{{- with .Values.deployment.annotations }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+    spec:
+    {{- if .Values.deployment.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.deployment.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.deployment.tolerations }}
+      tolerations:
+{{ toYaml .Values.deployment.tolerations | indent 8 }}
+    {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.deployment.gracePeriod }}
+      containers:
+        - name: "{{ template "streamvisor.fullname" . }}"
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+          imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
+        {{- if .Values.deployment.resources }}
+          resources:
+{{ toYaml .Values.deployment.resources | indent 12 }}
+        {{- end }}
+          ports:
+          - containerPort: {{ .Values.service.targetPort }}
+          volumeMounts:
+          {{- if .Values.persistence.enabled }}
+          - name: streamvisor-data
+            mountPath: "/streamvisor/data"
+          {{- end }}
+          {{- if .Values.deployment.extraVolumeMounts }}
+{{ toYaml .Values.deployment.extraVolumeMounts | indent 10 }}
+          {{- end }}
+          envFrom:
+          - configMapRef:
+              name: "{{ template "streamvisor.fullname" . }}"
+          env:
+          - name: PULSAR_CLUSTER
+            value: {{ template "streamvisor.fullname" . }}
+          - name: STREAMVISOR_BOOTSTRAPADMIN_NAME
+            valueFrom:
+              secretKeyRef:
+                key: STREAMVISOR_BOOTSTRAPADMIN_NAME
+                {{- if .Values.secretCredentials.existingSecretName }}
+                name: "{{ .Values.secretCredentials.existingSecretName }}"
+                {{- else }}
+                name: "{{ template "streamvisor.fullname" . }}-secret"
+                {{- end }}
+          - name: STREAMVISOR_BOOTSTRAPADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: STREAMVISOR_BOOTSTRAPADMIN_PASSWORD
+                {{- if .Values.secretCredentials.existingSecretName }}
+                name: "{{ .Values.secretCredentials.existingSecretName }}"
+                {{- else }}
+                name: "{{ template "streamvisor.fullname" . }}-secret"
+                {{- end }}
+          - name: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
+            valueFrom:
+              secretKeyRef:
+                key: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
+                {{- if .Values.secretCredentials.existingSecretName }}
+                name: "{{ .Values.secretCredentials.existingSecretName }}"
+                {{- else }}
+                name: "{{ template "streamvisor.fullname" . }}-secret"
+                {{- end }}
+      volumes:
+        {{- if .Values.persistence.enabled }}
+        - name: streamvisor-data
+          persistentVolumeClaim:
+            {{- if .Values.persistence.existingClaim }}
+            claimName: "{{ .Values.persistence.existingClaim }}"
+            {{- else }}
+            claimName: "{{ template "streamvisor.fullname" . }}-claim"
+            {{- end }}
+        {{- end }}
+        {{- if .Values.deployment.extraVolumes }}
+{{ toYaml .Values.deployment.extraVolumes | indent 8 }}
+        {{- end }}

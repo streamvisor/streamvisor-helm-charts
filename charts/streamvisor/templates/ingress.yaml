@@ -1,0 +1,48 @@
+{{- if .Values.ingress.enabled }}
+{{- if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version }}
+apiVersion: extensions/v1beta1
+{{- else }}
+apiVersion: networking.k8s.io/v1
+{{- end }}
+kind: Ingress
+metadata:
+  labels:
+    {{- include "streamvisor.standardLabels" . | nindent 4 }}
+  annotations:
+{{- with .Values.ingress.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+  name: "{{ template "streamvisor.fullname" . }}"
+  namespace: {{ template "streamvisor.namespace" . }}
+spec:
+  {{- with .Values.ingress.ingressClassName }}
+  ingressClassName: {{ . }}
+  {{- end }}
+{{- if .Values.ingress.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.hostname }}
+      {{- with .Values.ingress.tls.secretName }}
+      secretName: {{ . }}
+      {{- end }}
+{{- end }}
+  rules:
+    - http:
+        paths:
+          - path: {{ .Values.ingress.path }}
+            {{- if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version }}
+            backend:
+              serviceName: "{{ template "streamvisor.fullname" . }}"
+              servicePort: {{ .Values.service.targetPort }}
+            {{- else }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: "{{ template "streamvisor.fullname" . }}"
+                port:
+                  number: {{ .Values.service.targetPort }}
+            {{- end }}
+      {{- if .Values.ingress.hostname }}
+      host: {{ .Values.ingress.hostname }}
+      {{- end }}
+{{- end }}

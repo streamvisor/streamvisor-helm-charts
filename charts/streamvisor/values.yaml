@@ -1,0 +1,92 @@
+## Partially override name
+# nameOverride: ""
+
+## Fully override name
+# fullnameOverride: ""
+
+# Namespace to deploy in (if empty, defaults to .Release.Namespace (aka helm --namespace))
+namespace: ""
+
+# Kubernetes cluster domain name
+clusterDomain: cluster.local
+
+## Custom labels to add
+# labels:
+#   org: my-organization
+#   unit: data-foundations
+
+deployment:
+  image:
+    repository: streamvisor/streamvisor
+    tag: latest
+    #imagePullPolicy: IfNotPresent
+    # set pullPolicy to Never when using image from local docker
+    imagePullPolicy: Never
+  ## If set, adds the specified nodeSelector to the deployment spec
+  # nodeSelector:
+  # cloud.google.com/gke-nodepool: default-pool
+  annotations: {}
+  tolerations: []
+  gracePeriod: 30
+  resources:
+    requests:
+      memory: 250Mi
+      cpu: 0.1
+  ## Extra volume mounts to add to the deployment spec, for example to mount TLS certificates.
+  extraVolumeMounts:
+    # - name: tls-secrets
+    #   readOnly: true
+    #   mountPath: /streamvisor/tls
+  ## Extra volumes to add to the deployment spec, for example to mount TLS certificates.
+  extraVolumes:
+    # - name: tls-secrets
+    #   secret:
+    #     secretName: pulsar-tls
+
+
+config:
+  STREAMVISOR_BOOTSTRAPENV_ENABLE: "false"
+  STREAMVISOR_BOOTSTRAPENV_NAME: "development"
+  STREAMVISOR_BOOTSTRAPENV_SERVICEURL: "http://pulsar-proxy:8080"
+  STREAMVISOR_BOOTSTRAPENV_BROKERURL: "pulsar://pulsar-proxy:6650"
+
+service:
+  type: LoadBalancer
+  port: 9527
+  targetPort: 9527
+  annotations: {}
+
+persistence:
+  ## If true, persists Streamvisor data to a PersistentVolumeClaim.
+  ## Please always enable this in a production setup.
+  enabled: false
+  ## If set use existing volume claim with specified name for persistence.
+  # existingClaim:
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  ## If set, provisions the PVC with the specified storageClassName
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined or set to null, no storageClassName spec is set, using the default provisioner (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack).
+  # storageClass: "-"
+
+ingress:
+  enabled: false
+  annotations: {}
+  ingressClassName: ""
+  tls:
+    enabled: false
+    ## Optional. Leave it blank if your Ingress Controller can provide a default certificate.
+    secretName: ""
+  hostname: ""
+  path: "/"
+
+secretCredentials:
+  ## If set use existing secret with specified name to set admin credentials.
+  # existingSecretName:
+  admin:
+    username: admin
+    password: pulsar
+    email: admin@example.org
