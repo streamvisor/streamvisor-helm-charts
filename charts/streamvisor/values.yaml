@@ -30,8 +30,11 @@ deployment:
   gracePeriod: 30
   resources:
     requests:
-      memory: 250Mi
-      cpu: 0.1
+      memory: 1Gi
+      cpu: 1000m
+    limits:
+      memory: 2Gi
+      cpu: 2000m
   ## Extra volume mounts to add to the deployment spec, for example to mount TLS certificates.
   extraVolumeMounts:
     # - name: tls-secrets
