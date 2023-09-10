@@ -5,6 +5,9 @@ Official repository for installing Streamvisor on Kubernetes using Helm.
 * Kubernetes
 * Helm
 
+## Charts
+* Streamvisor ([docs](charts/streamvisor/README.md), [values](charts/streamvisor/values.yaml))
+
 ## Usage
 ```
 helm repo add TODO

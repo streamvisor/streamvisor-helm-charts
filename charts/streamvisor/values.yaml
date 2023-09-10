@@ -1,95 +1,148 @@
-## Partially override name
-# nameOverride: ""
+## @section Common parameters
+## @descriptionStart
+## Parameters shared among Streamvisor components
+## @descriptionEnd
 
-## Fully override name
-# fullnameOverride: ""
+## @param nameOverride String to partially override name
+nameOverride: ""
 
-# Namespace to deploy in (if empty, defaults to .Release.Namespace (aka helm --namespace))
+## @param fullnameOverride String to fully override name
+fullnameOverride: ""
+
+## @param namespace String to specify namespace to deploy in (if empty, defaults to .Release.Namespace (aka helm --namespace))
 namespace: ""
 
-# Kubernetes cluster domain name
+## @param clusterDomain Kubernetes cluster domain name
 clusterDomain: cluster.local
 
-## Custom labels to add
-# labels:
-#   org: my-organization
-#   unit: data-foundations
+## @param labels Custom labels to add to all components
+labels: {}
 
+## @section Streamvisor deployment parameters
+## @descriptionStart
+## Parameters for Streamvisor deployment
+## @descriptionEnd
 deployment:
   image:
+    ## @param deployment.image.repository Streamvisor image repository
     repository: streamvisor/streamvisor
+    ## @param deployment.image.tag Streamvisor image tag
     tag: latest
-    #imagePullPolicy: IfNotPresent
-    # set pullPolicy to Never when using image from local docker
+    ## @param deployment.image.imagePullPolicy Streamvisor imagePullPolicy
     imagePullPolicy: Never
-  ## If set, adds the specified nodeSelector to the deployment spec
-  # nodeSelector:
-  # cloud.google.com/gke-nodepool: default-pool
+  ## @param deployment.nodeSelector Node labels for Streamvisor pod assignment
+  nodeSelector: {}
+  ## @param deployment.annotations Annotations for Streamvisor pod
   annotations: {}
+  ## @param deployment.tolerations Tolerations for Streamvisor pod assignment
   tolerations: []
+  ## @param deployment.gracePeriod Seconds in which pod needs to terminate gracefully
   gracePeriod: 30
   resources:
     requests:
+      ## @param deployment.resources.requests.memory Memory request for the Streamvisor pod
       memory: 1Gi
+      ## @param deployment.resources.requests.cpu CPU request for the Streamvisor pod
       cpu: 1000m
     limits:
+      ## @param deployment.resources.limits.memory Memory limit for the Streamvisor pod
       memory: 2Gi
+      ## @param deployment.resources.limits.cpu CPU limit for the Streamvisor pod
       cpu: 2000m
-  ## Extra volume mounts to add to the deployment spec, for example to mount TLS certificates.
+  ## @param deployment.extraVolumeMounts Extra volume mounts to add to the deployment spec, for example to mount TLS certificates
+  ## e.g. 
+  ## - name: tls-secrets
+  ##   readOnly: true
+  ##   mountPath: /streamvisor/tls
   extraVolumeMounts:
-    # - name: tls-secrets
-    #   readOnly: true
-    #   mountPath: /streamvisor/tls
-  ## Extra volumes to add to the deployment spec, for example to mount TLS certificates.
+    
+  ## @param deployment.extraVolumes Extra volumes to add to the deployment spec, for example to mount TLS certificates
+  ## e.g.
+  ## - name: tls-secrets
+  ##   secret:
+  ##   secretName: pulsar-tls
   extraVolumes:
-    # - name: tls-secrets
-    #   secret:
-    #     secretName: pulsar-tls
 
-
+## @section Streamvisor configuration properties
+## @descriptionStart
+## Refer to our [documentation](https://docs.streamvisor.com/installation/configuration-reference/) for the full list of configuration properties
+## @descriptionEnd
+## @param config Configuration properties to mount as environment variables
+## e.g.
+## STREAMVISOR_BOOTSTRAPENV_ENABLE: "true"
+## STREAMVISOR_BOOTSTRAPENV_NAME: "development"
+## STREAMVISOR_BOOTSTRAPENV_SERVICEURL: "http://pulsar-proxy:8080"
+## STREAMVISOR_BOOTSTRAPENV_BROKERURL: "pulsar://pulsar-proxy:6650"
 config:
-  STREAMVISOR_BOOTSTRAPENV_ENABLE: "false"
-  STREAMVISOR_BOOTSTRAPENV_NAME: "development"
-  STREAMVISOR_BOOTSTRAPENV_SERVICEURL: "http://pulsar-proxy:8080"
-  STREAMVISOR_BOOTSTRAPENV_BROKERURL: "pulsar://pulsar-proxy:6650"
 
-service:
-  type: LoadBalancer
-  port: 9527
-  targetPort: 9527
-  annotations: {}
 
-persistence:
-  ## If true, persists Streamvisor data to a PersistentVolumeClaim.
-  ## Please always enable this in a production setup.
+## @section Streamvisor persistence parameters
+## @descriptionStart
+## Parameters for Streamvisor persistence
+## @descriptionEnd
+persistence:  
+  ## @param persistence.enabled If true, persists Streamvisor data to a PersistentVolumeClaim. Please always enable this in a production setup!
   enabled: false
-  ## If set use existing volume claim with specified name for persistence.
-  # existingClaim:
+  ## @param persistence.existingClaim If set use existing volume claim with specified name instead of provisioning one
+  existingClaim:
+  ## @param persistence.annotations Annotations for Streamvisor PersistentVolumeClaim
   annotations: {}
+  ## @param persistence.accessModes Access modes for Streamvisor PersistentVolumeClaim
   accessModes:
     - ReadWriteOnce
+  ## @param persistence.size Size for Streamvisor PersistentVolumeClaim
   size: 1Gi
-  ## If set, provisions the PVC with the specified storageClassName
+  ## @param persistence.storageClass Storage class name for Streamvisor PersistentVolumeClaim
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
-  ## If undefined or set to null, no storageClassName spec is set, using the default provisioner (gp2 on AWS, standard on
-  ##   GKE, AWS & OpenStack).
-  # storageClass: "-"
+  ## If undefined or set to null, no storageClassName spec is set, using the default provisioner (gp2 on AWS, standard on GKE, AWS & OpenStack).
+  storageClass:
 
-ingress:
-  enabled: false
+## @section Streamvisor credentials secret parameters
+## @descriptionStart
+## Parameters for Streamvisor credentials secret
+## @descriptionEnd
+secretCredentials:
+  ## @param secretCredentials.existingSecretName If set use existing credentials secret with specified name instead of provisioning one
+  existingSecretName:
+  admin:
+    ## @param secretCredentials.admin.username Streamvisor admin username
+    username: admin
+    ## @param secretCredentials.admin.password Streamvisor admin password
+    password: pulsar
+    ## @param secretCredentials.admin.email Streamvisor admin email
+    email: admin@example.org
+
+## @section Streamvisor service parameters
+## @descriptionStart
+## Parameters for Streamvisor service
+## @descriptionEnd
+service:
+  ## @param service.type Streamvisor service type
+  type: LoadBalancer
+  ## @param service.port Streamvisor service port
+  port: 9527
+  ## @param service.targetPort Streamvisor service target port
+  targetPort: 9527
+  ## @param service.annotations Streamvisor service annotation
   annotations: {}
+
+## @section Streamvisor ingress parameters
+## @descriptionStart
+## Parameters for Streamvisor ingress
+## @descriptionEnd
+ingress:
+  ## @param ingress.enabled If true, provisions an ingress for Streamvisor
+  enabled: false
+  ## @param ingress.annotations Streamvisor ingress annotations
+  annotations: {}
+  ## @param ingress.ingressClassName Streamvisor ingress class name
   ingressClassName: ""
   tls:
+    ## @param ingress.tls.enabled If true, enable TLS configuration
     enabled: false
-    ## Optional. Leave it blank if your Ingress Controller can provide a default certificate.
+    ## @param ingress.tls.secretName Optional. Leave it blank if your Ingress Controller can provide a default certificate
     secretName: ""
+  ## @param ingress.hostname Streamvisor ingress host name
   hostname: ""
+  ## @param ingress.path Streamvisor ingress path
   path: "/"
-
-secretCredentials:
-  ## If set use existing secret with specified name to set admin credentials.
-  # existingSecretName:
-  admin:
-    username: admin
-    password: pulsar
-    email: admin@example.org
