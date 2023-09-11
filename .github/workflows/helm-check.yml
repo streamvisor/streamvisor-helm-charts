@@ -1,0 +1,27 @@
+name: Helm check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  helm-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Helm lint template charts
+        run: |
+          charts_dirs="$(ls charts/)"
+          for chart in ${charts_dirs}; do
+            echo "Checking ${chart}"
+            helm lint charts/$chart/ -f charts/$chart/values.yaml
+            helm template charts/$chart -f charts/$chart/values.yaml
+          done
