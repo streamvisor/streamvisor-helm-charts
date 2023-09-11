@@ -10,11 +10,11 @@ Official repository for installing Streamvisor on Kubernetes using Helm.
 
 ## Usage
 ```
-helm repo add TODO
+helm repo add https://helm.streamvisor.com
 helm repo update
 ```
 
-For installation and configuration instructions, please refer to our [documentation](https://TODO).
+For installation and configuration instructions, please refer to our [documentation](https://docs.streamvisor.com/installation/getting-started/helm/).
 
 
 ## Contribute

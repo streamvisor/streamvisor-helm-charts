@@ -25,11 +25,11 @@ labels: {}
 deployment:
   image:
     ## @param deployment.image.repository Streamvisor image repository
-    repository: streamvisor/streamvisor
+    repository: ghcr.io/streamvisor/streamvisor
     ## @param deployment.image.tag Streamvisor image tag
-    tag: latest
+    tag: 1.0.0
     ## @param deployment.image.imagePullPolicy Streamvisor imagePullPolicy
-    imagePullPolicy: Never
+    imagePullPolicy: IfNotPresent
   ## @param deployment.nodeSelector Node labels for Streamvisor pod assignment
   nodeSelector: {}
   ## @param deployment.annotations Annotations for Streamvisor pod
