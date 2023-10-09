@@ -19,21 +19,21 @@ Parameters shared among Streamvisor components
 
 Parameters for Streamvisor deployment
 
-| Name                                   | Description                                                                              | Value                     |
-| -------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------- |
-| `deployment.image.repository`          | Streamvisor image repository                                                             | `streamvisor/streamvisor` |
-| `deployment.image.tag`                 | Streamvisor image tag                                                                    | `latest`                  |
-| `deployment.image.imagePullPolicy`     | Streamvisor imagePullPolicy                                                              | `Never`                   |
-| `deployment.nodeSelector`              | Node labels for Streamvisor pod assignment                                               | `{}`                      |
-| `deployment.annotations`               | Annotations for Streamvisor pod                                                          | `{}`                      |
-| `deployment.tolerations`               | Tolerations for Streamvisor pod assignment                                               | `[]`                      |
-| `deployment.gracePeriod`               | Seconds in which pod needs to terminate gracefully                                       | `30`                      |
-| `deployment.resources.requests.memory` | Memory request for the Streamvisor pod                                                   | `1Gi`                     |
-| `deployment.resources.requests.cpu`    | CPU request for the Streamvisor pod                                                      | `1000m`                   |
-| `deployment.resources.limits.memory`   | Memory limit for the Streamvisor pod                                                     | `2Gi`                     |
-| `deployment.resources.limits.cpu`      | CPU limit for the Streamvisor pod                                                        | `2000m`                   |
-| `deployment.extraVolumeMounts`         | Extra volume mounts to add to the deployment spec, for example to mount TLS certificates | `nil`                     |
-| `deployment.extraVolumes`              | Extra volumes to add to the deployment spec, for example to mount TLS certificates       | `nil`                     |
+| Name                                   | Description                                                                              | Value                             |
+| -------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------- |
+| `deployment.image.repository`          | Streamvisor image repository                                                             | `ghcr.io/streamvisor/streamvisor` |
+| `deployment.image.tag`                 | Streamvisor image tag                                                                    | `1.0.0`                           |
+| `deployment.image.imagePullPolicy`     | Streamvisor imagePullPolicy                                                              | `IfNotPresent`                    |
+| `deployment.nodeSelector`              | Node labels for Streamvisor pod assignment                                               | `{}`                              |
+| `deployment.annotations`               | Annotations for Streamvisor pod                                                          | `{}`                              |
+| `deployment.tolerations`               | Tolerations for Streamvisor pod assignment                                               | `[]`                              |
+| `deployment.gracePeriod`               | Seconds in which pod needs to terminate gracefully                                       | `30`                              |
+| `deployment.resources.requests.memory` | Memory request for the Streamvisor pod                                                   | `1Gi`                             |
+| `deployment.resources.requests.cpu`    | CPU request for the Streamvisor pod                                                      | `1000m`                           |
+| `deployment.resources.limits.memory`   | Memory limit for the Streamvisor pod                                                     | `2Gi`                             |
+| `deployment.resources.limits.cpu`      | CPU limit for the Streamvisor pod                                                        | `2000m`                           |
+| `deployment.extraVolumeMounts`         | Extra volume mounts to add to the deployment spec, for example to mount TLS certificates | `nil`                             |
+| `deployment.extraVolumes`              | Extra volumes to add to the deployment spec, for example to mount TLS certificates       | `nil`                             |
 
 ### Streamvisor configuration properties
 
@@ -74,8 +74,8 @@ Parameters for Streamvisor service
 | Name                  | Description                     | Value          |
 | --------------------- | ------------------------------- | -------------- |
 | `service.type`        | Streamvisor service type        | `LoadBalancer` |
-| `service.port`        | Streamvisor service port        | `9527`         |
-| `service.targetPort`  | Streamvisor service target port | `9527`         |
+| `service.port`        | Streamvisor service port        | `8888`         |
+| `service.targetPort`  | Streamvisor service target port | `8888`         |
 | `service.annotations` | Streamvisor service annotation  | `{}`           |
 
 ### Streamvisor ingress parameters

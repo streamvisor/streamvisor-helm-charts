@@ -120,9 +120,9 @@ service:
   ## @param service.type Streamvisor service type
   type: LoadBalancer
   ## @param service.port Streamvisor service port
-  port: 9527
+  port: 8888
   ## @param service.targetPort Streamvisor service target port
-  targetPort: 9527
+  targetPort: 8888
   ## @param service.annotations Streamvisor service annotation
   annotations: {}
 
