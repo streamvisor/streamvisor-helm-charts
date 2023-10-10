@@ -71,12 +71,12 @@ Parameters for Streamvisor credentials secret
 
 Parameters for Streamvisor service
 
-| Name                  | Description                     | Value          |
-| --------------------- | ------------------------------- | -------------- |
-| `service.type`        | Streamvisor service type        | `LoadBalancer` |
-| `service.port`        | Streamvisor service port        | `8888`         |
-| `service.targetPort`  | Streamvisor service target port | `8888`         |
-| `service.annotations` | Streamvisor service annotation  | `{}`           |
+| Name                  | Description                     | Value       |
+| --------------------- | ------------------------------- | ----------- |
+| `service.type`        | Streamvisor service type        | `ClusterIP` |
+| `service.port`        | Streamvisor service port        | `8888`      |
+| `service.targetPort`  | Streamvisor service target port | `8888`      |
+| `service.annotations` | Streamvisor service annotation  | `{}`        |
 
 ### Streamvisor ingress parameters
 

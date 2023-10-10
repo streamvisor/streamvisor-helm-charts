@@ -4,13 +4,13 @@
 ## @descriptionEnd
 
 ## @param nameOverride String to partially override name
-nameOverride: ""
+nameOverride: ''
 
 ## @param fullnameOverride String to fully override name
-fullnameOverride: ""
+fullnameOverride: ''
 
 ## @param namespace String to specify namespace to deploy in (if empty, defaults to .Release.Namespace (aka helm --namespace))
-namespace: ""
+namespace: ''
 
 ## @param clusterDomain Kubernetes cluster domain name
 clusterDomain: cluster.local
@@ -50,12 +50,12 @@ deployment:
       ## @param deployment.resources.limits.cpu CPU limit for the Streamvisor pod
       cpu: 2000m
   ## @param deployment.extraVolumeMounts Extra volume mounts to add to the deployment spec, for example to mount TLS certificates
-  ## e.g. 
+  ## e.g.
   ## - name: tls-secrets
   ##   readOnly: true
   ##   mountPath: /streamvisor/tls
   extraVolumeMounts:
-    
+
   ## @param deployment.extraVolumes Extra volumes to add to the deployment spec, for example to mount TLS certificates
   ## e.g.
   ## - name: tls-secrets
@@ -75,12 +75,11 @@ deployment:
 ## STREAMVISOR_BOOTSTRAPENV_BROKERURL: "pulsar://pulsar-proxy:6650"
 config:
 
-
 ## @section Streamvisor persistence parameters
 ## @descriptionStart
 ## Parameters for Streamvisor persistence
 ## @descriptionEnd
-persistence:  
+persistence:
   ## @param persistence.enabled If true, persists Streamvisor data to a PersistentVolumeClaim. Please always enable this in a production setup!
   enabled: false
   ## @param persistence.existingClaim If set use existing volume claim with specified name instead of provisioning one
@@ -118,7 +117,7 @@ secretCredentials:
 ## @descriptionEnd
 service:
   ## @param service.type Streamvisor service type
-  type: LoadBalancer
+  type: ClusterIP
   ## @param service.port Streamvisor service port
   port: 8888
   ## @param service.targetPort Streamvisor service target port
@@ -136,13 +135,13 @@ ingress:
   ## @param ingress.annotations Streamvisor ingress annotations
   annotations: {}
   ## @param ingress.ingressClassName Streamvisor ingress class name
-  ingressClassName: ""
+  ingressClassName: ''
   tls:
     ## @param ingress.tls.enabled If true, enable TLS configuration
     enabled: false
     ## @param ingress.tls.secretName Optional. Leave it blank if your Ingress Controller can provide a default certificate
-    secretName: ""
+    secretName: ''
   ## @param ingress.hostname Streamvisor ingress host name
-  hostname: ""
+  hostname: ''
   ## @param ingress.path Streamvisor ingress path
-  path: "/"
+  path: '/'
