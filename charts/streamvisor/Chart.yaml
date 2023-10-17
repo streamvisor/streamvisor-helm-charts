@@ -1,12 +1,12 @@
 apiVersion: v2
-appVersion: 1.0.0
-version: 1.0.0
+appVersion: 0.1.0
+version: 0.1.0
 description: Helm chart to deploy Streamvisor on Kubernetes
 name: streamvisor
 icon: https://avatars.githubusercontent.com/u/135866005
 home: https://streamvisor.com
 sources:
-- https://github.com/streamvisor/streamvisor-public-charts
+  - https://github.com/streamvisor/streamvisor-public-charts
 maintainers:
-- name: Streamvisor Team
-  url: https://docs.streamvisor.com
+  - name: Streamvisor Team
+    url: https://docs.streamvisor.com
