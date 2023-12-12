@@ -91,3 +91,11 @@ Parameters for Streamvisor ingress
 | `ingress.tls.secretName`   | Optional. Leave it blank if your Ingress Controller can provide a default certificate | `""`    |
 | `ingress.hostname`         | Streamvisor ingress host name                                                         | `""`    |
 | `ingress.path`             | Streamvisor ingress path                                                              | `/`     |
+
+### Streamvisor license
+
+Add the content of your license file under the license property to automatically wire up the license file as a mounted secret
+
+| Name      | Description                      | Value |
+| --------- | -------------------------------- | ----- |
+| `license` | Streamvisor license file content | `""`  |
