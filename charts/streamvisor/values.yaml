@@ -145,3 +145,10 @@ ingress:
   hostname: ''
   ## @param ingress.path Streamvisor ingress path
   path: '/'
+
+## @section Streamvisor license
+## @descriptionStart
+## Add the content of your license file under the license property to automatically wire up the license file as a mounted secret
+## @descriptionEnd
+## @param license Streamvisor license file content
+license: |

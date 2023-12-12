@@ -39,6 +39,11 @@ spec:
           ports:
           - containerPort: {{ .Values.service.targetPort }}
           volumeMounts:
+          {{- if .Values.license }}
+          - name: streamvisor-license
+            mountPath: "/streamvisor/license"
+            readOnly: true
+          {{- end }}
           {{- if .Values.persistence.enabled }}
           - name: streamvisor-data
             mountPath: "/streamvisor/data"
@@ -52,6 +57,10 @@ spec:
           env:
           - name: PULSAR_CLUSTER
             value: {{ template "streamvisor.fullname" . }}
+          {{- if .Values.license }}
+          - name: STREAMVISOR_LICENSE_FILEPATH
+            value: "/streamvisor/license/license.lic"
+          {{- end }}
           - name: STREAMVISOR_BOOTSTRAPADMIN_NAME
             valueFrom:
               secretKeyRef:
@@ -80,6 +89,11 @@ spec:
                 name: "{{ template "streamvisor.fullname" . }}-secret"
                 {{- end }}
       volumes:
+        {{- if .Values.license }}
+        - name: streamvisor-license
+          secret:
+            secretName: "{{ template "streamvisor.fullname" . }}-license-secret"
+        {{- end}}
         {{- if .Values.persistence.enabled }}
         - name: streamvisor-data
           persistentVolumeClaim:
