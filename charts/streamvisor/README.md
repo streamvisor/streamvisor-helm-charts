@@ -70,9 +70,8 @@ Parameters for Streamvisor credentials secret
 | Name                                   | Description                                                                            | Value               |
 | -------------------------------------- | -------------------------------------------------------------------------------------- | ------------------- |
 | `secretCredentials.existingSecretName` | If set use existing credentials secret with specified name instead of provisioning one | `nil`               |
-| `secretCredentials.admin.username`     | Streamvisor admin username                                                             | `admin`             |
-| `secretCredentials.admin.password`     | Streamvisor admin password                                                             | `pulsar`            |
 | `secretCredentials.admin.email`        | Streamvisor admin email                                                                | `admin@example.org` |
+| `secretCredentials.admin.password`     | Streamvisor admin password                                                             | `pulsar`            |
 
 ### Streamvisor service parameters
 
