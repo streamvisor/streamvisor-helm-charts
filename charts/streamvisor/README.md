@@ -46,6 +46,13 @@ Refer to our [documentation](https://docs.streamvisor.com/installation/configura
 ### Streamvisor persistence parameters
 
 Parameters for Streamvisor persistence
+When using PostgreSQL instead of the default filesystem storage, please set `persistence.enabled` to false and configure your PostgreSQL connection using the following env variables in the `config` block:
+```
+STREAMVISOR_PERSISTENCE_URL=jdbc:postgresql://<host>:<port>/streamvisor
+STREAMVISOR_PERSISTENCE_DRIVERCLASSNAME=org.postgresql.Driver
+STREAMVISOR_PERSISTENCE_USERNAME=postgres
+STREAMVISOR_PERSISTENCE_PASSWORD=postgres
+```
 
 | Name                        | Description                                                                                                     | Value               |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------- |
