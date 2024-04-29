@@ -61,10 +61,10 @@ spec:
           - name: STREAMVISOR_LICENSE_FILEPATH
             value: "/streamvisor/license/license.lic"
           {{- end }}
-          - name: STREAMVISOR_BOOTSTRAPADMIN_NAME
+          - name: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
             valueFrom:
               secretKeyRef:
-                key: STREAMVISOR_BOOTSTRAPADMIN_NAME
+                key: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
                 {{- if .Values.secretCredentials.existingSecretName }}
                 name: "{{ .Values.secretCredentials.existingSecretName }}"
                 {{- else }}
@@ -74,15 +74,6 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: STREAMVISOR_BOOTSTRAPADMIN_PASSWORD
-                {{- if .Values.secretCredentials.existingSecretName }}
-                name: "{{ .Values.secretCredentials.existingSecretName }}"
-                {{- else }}
-                name: "{{ template "streamvisor.fullname" . }}-secret"
-                {{- end }}
-          - name: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
-            valueFrom:
-              secretKeyRef:
-                key: STREAMVISOR_BOOTSTRAPADMIN_EMAIL
                 {{- if .Values.secretCredentials.existingSecretName }}
                 name: "{{ .Values.secretCredentials.existingSecretName }}"
                 {{- else }}

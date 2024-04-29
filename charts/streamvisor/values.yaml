@@ -111,12 +111,10 @@ secretCredentials:
   ## @param secretCredentials.existingSecretName If set use existing credentials secret with specified name instead of provisioning one
   existingSecretName:
   admin:
-    ## @param secretCredentials.admin.username Streamvisor admin username
-    username: admin
-    ## @param secretCredentials.admin.password Streamvisor admin password
-    password: pulsar
     ## @param secretCredentials.admin.email Streamvisor admin email
     email: admin@example.org
+    ## @param secretCredentials.admin.password Streamvisor admin password
+    password: pulsar
 
 ## @section Streamvisor service parameters
 ## @descriptionStart
