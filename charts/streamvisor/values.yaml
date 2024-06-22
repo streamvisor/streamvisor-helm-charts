@@ -69,10 +69,9 @@ deployment:
 ## @descriptionEnd
 ## @param config Configuration properties to mount as environment variables
 ## e.g.
-## STREAMVISOR_BOOTSTRAPENV_ENABLE: "true"
-## STREAMVISOR_BOOTSTRAPENV_NAME: "development"
-## STREAMVISOR_BOOTSTRAPENV_SERVICEURL: "http://pulsar-proxy:8080"
-## STREAMVISOR_BOOTSTRAPENV_BROKERURL: "pulsar://pulsar-proxy:6650"
+## STREAMVISOR_ENVIRONMENTS_0_NAME: "development"
+## STREAMVISOR_ENVIRONMENTS_0_SERVICEURL: "http://pulsar-proxy:8080"
+## STREAMVISOR_ENVIRONMENTS_0_BROKERURL: "pulsar://pulsar-proxy:6650"
 config:
 
 ## @section Streamvisor persistence parameters
