@@ -37,7 +37,7 @@ Parameters for Streamvisor deployment
 
 ### Streamvisor configuration properties
 
-Refer to our [documentation](https://docs.streamvisor.com/installation/configuration-reference/) for the full list of configuration properties
+Refer to our [documentation](https://docs.streamvisor.com/installation/configuration/) for the full list of configuration properties
 
 | Name     | Description                                                | Value |
 | -------- | ---------------------------------------------------------- | ----- |

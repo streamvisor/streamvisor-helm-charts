@@ -6,7 +6,7 @@ name: streamvisor
 icon: https://avatars.githubusercontent.com/u/135866005
 home: https://streamvisor.com
 sources:
-  - https://github.com/streamvisor/streamvisor-public-charts
+  - https://github.com/streamvisor/streamvisor-helm-charts
 maintainers:
   - name: Streamvisor Team
     url: https://docs.streamvisor.com
