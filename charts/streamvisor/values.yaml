@@ -65,7 +65,7 @@ deployment:
 
 ## @section Streamvisor configuration properties
 ## @descriptionStart
-## Refer to our [documentation](https://docs.streamvisor.com/installation/configuration-reference/) for the full list of configuration properties
+## Refer to our [documentation](https://docs.streamvisor.com/installation/configuration/) for the full list of configuration properties
 ## @descriptionEnd
 ## @param config Configuration properties to mount as environment variables
 ## e.g.
