@@ -143,6 +143,19 @@ networkPolicy:
   egress:
     - {}
 
+## @section Streamvisor Route parameters
+## @descriptionStart
+## Parameters for Streamvisor Route in OpenShift environments. If you are not running on OpenShift, please refer to the Ingress section instead.
+## @descriptionEnd
+route:
+  ## @param route.enabled If true, provisions an OpenShift Route for Streamvisor
+  enabled: false
+  ## @param route.annotations Streamvisor Route annotations
+  annotations: {}
+  ## @param route.host Optional. Alias/DNS pointing to the service
+  host: ''
+  ## @param route.tls Optional. TLSConfig to secure route and provide termination
+  tls: {}
 
 ## @section Streamvisor ingress parameters
 ## @descriptionStart

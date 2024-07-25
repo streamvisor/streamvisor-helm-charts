@@ -94,6 +94,17 @@ Parameters for Streamvisor NetworkPolicy
 | `networkPolicy.ingress`     | List of ingress rules to be applied to the Streamvisor pod (default allows all ingress traffic) | `- {}` |
 | `networkPolicy.egress`      | List of egress rules to be applied to the Streamvisor pod (default allows all egress traffic)   | `- {}` |
 
+### Streamvisor Route parameters
+
+Parameters for Streamvisor Route in OpenShift environments. If you are not running on OpenShift, please refer to the Ingress section instead.
+
+| Name                | Description                                                 | Value   |
+| ------------------- | ----------------------------------------------------------- | ------- |
+| `route.enabled`     | If true, provisions an OpenShift Route for Streamvisor      | `false` |
+| `route.annotations` | Streamvisor Route annotations                               | `{}`    |
+| `route.host`        | Optional. Alias/DNS pointing to the service                 | `""`    |
+| `route.tls`         | Optional. TLSConfig to secure route and provide termination | `{}`    |
+
 ### Streamvisor ingress parameters
 
 Parameters for Streamvisor ingress
