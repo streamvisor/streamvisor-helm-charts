@@ -84,6 +84,16 @@ Parameters for Streamvisor service
 | `service.targetPort`  | Streamvisor service target port | `8888`      |
 | `service.annotations` | Streamvisor service annotation  | `{}`        |
 
+### Streamvisor NetworkPolicy parameters
+
+Parameters for Streamvisor NetworkPolicy
+
+| Name                        | Description                                                                                     | Value  |
+| --------------------------- | ----------------------------------------------------------------------------------------------- | ------ |
+| `networkPolicy.annotations` | Streamvisor NetworkPolicy annotations                                                           | `{}`   |
+| `networkPolicy.ingress`     | List of ingress rules to be applied to the Streamvisor pod (default allows all ingress traffic) | `- {}` |
+| `networkPolicy.egress`      | List of egress rules to be applied to the Streamvisor pod (default allows all egress traffic)   | `- {}` |
+
 ### Streamvisor ingress parameters
 
 Parameters for Streamvisor ingress
