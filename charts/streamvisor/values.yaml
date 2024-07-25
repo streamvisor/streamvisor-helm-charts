@@ -129,6 +129,21 @@ service:
   ## @param service.annotations Streamvisor service annotation
   annotations: {}
 
+## @section Streamvisor NetworkPolicy parameters
+## @descriptionStart
+## Parameters for Streamvisor NetworkPolicy
+## @descriptionEnd
+networkPolicy:
+  ## @param networkPolicy.annotations Streamvisor NetworkPolicy annotations
+  annotations: {}
+  ## @param networkPolicy.ingress [default: - {}] List of ingress rules to be applied to the Streamvisor pod (default allows all ingress traffic)
+  ingress:
+    - {}
+  ## @param networkPolicy.egress [default: - {}] List of egress rules to be applied to the Streamvisor pod (default allows all egress traffic)
+  egress:
+    - {}
+
+
 ## @section Streamvisor ingress parameters
 ## @descriptionStart
 ## Parameters for Streamvisor ingress
