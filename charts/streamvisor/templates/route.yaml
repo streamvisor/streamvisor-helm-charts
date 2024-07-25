@@ -1,0 +1,26 @@
+{{- if and .Values.route.enabled (.Capabilities.APIVersions.Has "route.openshift.io/v1/Route") }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: "{{ template "streamvisor.fullname" . }}"
+  namespace: {{ template "streamvisor.namespace" . }}
+  labels:
+    {{- include "streamvisor.standardLabels" . | nindent 4 }}
+  annotations:
+{{- with .Values.route.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  {{- if .Values.route.host }}
+  host: {{ .Values.route.host }}
+  {{- end }}
+  to:
+    kind: Service
+    name: "{{ template "streamvisor.fullname" . }}"
+  port:
+    targetPort: http
+  {{- if .Values.route.tls }}
+  tls:
+{{ toYaml .Values.route.tls | indent 4 }}
+  {{- end }}
+{{- end }}
