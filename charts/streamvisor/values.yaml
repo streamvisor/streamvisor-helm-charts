@@ -27,7 +27,7 @@ deployment:
     ## @param deployment.image.repository Streamvisor image repository
     repository: ghcr.io/streamvisor/streamvisor
     ## @param deployment.image.tag Streamvisor image tag
-    tag: 3.1.0
+    tag: 3.1.1
     ## @param deployment.image.imagePullPolicy Streamvisor imagePullPolicy
     imagePullPolicy: IfNotPresent
   ## @param deployment.nodeSelector Node labels for Streamvisor pod assignment
