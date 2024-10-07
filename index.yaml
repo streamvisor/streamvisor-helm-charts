@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   streamvisor:
   - apiVersion: v2
+    appVersion: 3.1.1
+    created: "2024-10-07T09:12:54.179002291Z"
+    description: Helm chart to deploy Streamvisor on Kubernetes
+    digest: 48e6c345ab0cd132755afef6506977ca6de40e7aaca1962af26eb7580624ae87
+    home: https://streamvisor.com
+    icon: https://avatars.githubusercontent.com/u/135866005
+    maintainers:
+    - name: Streamvisor Team
+      url: https://docs.streamvisor.com
+    name: streamvisor
+    sources:
+    - https://github.com/streamvisor/streamvisor-helm-charts
+    urls:
+    - https://github.com/streamvisor/streamvisor-helm-charts/releases/download/streamvisor-3.1.1/streamvisor-3.1.1.tgz
+    version: 3.1.1
+  - apiVersion: v2
     appVersion: 3.1.0
     created: "2024-09-17T17:58:41.981349094Z"
     description: Helm chart to deploy Streamvisor on Kubernetes
@@ -113,4 +129,4 @@ entries:
     urls:
     - https://github.com/streamvisor/streamvisor-helm-charts/releases/download/streamvisor-0.1.0/streamvisor-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-17T17:58:41.981379921Z"
+generated: "2024-10-07T09:12:54.179043358Z"
