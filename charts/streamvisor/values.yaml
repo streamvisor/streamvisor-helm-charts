@@ -183,4 +183,10 @@ ingress:
 ## Add the content of your license file under the license property to automatically wire up the license file as a mounted secret
 ## @descriptionEnd
 ## @param license Streamvisor license file content
+## e.g.
+## license: |
+##  -----BEGIN LICENSE FILE-----
+##  eyJlbmMiOiJleUprWVhSaElqcDdJbWxrSWpvaVptSTBNVFZrTlRBdFpUaGha
+##  ...
+##  -----END LICENSE FILE-----
 license: |
