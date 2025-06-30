@@ -22,7 +22,7 @@ Parameters for Streamvisor deployment
 | Name                                   | Description                                                                              | Value                             |
 | -------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------- |
 | `deployment.image.repository`          | Streamvisor image repository                                                             | `ghcr.io/streamvisor/streamvisor` |
-| `deployment.image.tag`                 | Streamvisor image tag                                                                    | `3.2.1`                           |
+| `deployment.image.tag`                 | Streamvisor image tag                                                                    | `4.0.0`                           |
 | `deployment.image.imagePullPolicy`     | Streamvisor imagePullPolicy                                                              | `IfNotPresent`                    |
 | `deployment.nodeSelector`              | Node labels for Streamvisor pod assignment                                               | `{}`                              |
 | `deployment.annotations`               | Annotations for Streamvisor pod                                                          | `{}`                              |
