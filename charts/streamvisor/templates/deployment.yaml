@@ -27,6 +27,10 @@ spec:
       tolerations:
 {{ toYaml .Values.deployment.tolerations | indent 8 }}
     {{- end }}
+    {{- if .Values.deployment.podSecurityContext }}
+      securityContext:
+{{ toYaml .Values.deployment.podSecurityContext | indent 8 }}
+    {{- end }}
       terminationGracePeriodSeconds: {{ .Values.deployment.gracePeriod }}
       containers:
         - name: "{{ template "streamvisor.fullname" . }}"

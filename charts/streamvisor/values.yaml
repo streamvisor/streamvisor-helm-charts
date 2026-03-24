@@ -36,6 +36,8 @@ deployment:
   annotations: {}
   ## @param deployment.tolerations Tolerations for Streamvisor pod assignment
   tolerations: []
+  ## @param deployment.podSecurityContext Pod-level security context (e.g. fsGroup for volume permissions)
+  podSecurityContext: {}
   ## @param deployment.gracePeriod Seconds in which pod needs to terminate gracefully
   gracePeriod: 30
   resources:
