@@ -27,6 +27,7 @@ Parameters for Streamvisor deployment
 | `deployment.nodeSelector`              | Node labels for Streamvisor pod assignment                                               | `{}`                              |
 | `deployment.annotations`               | Annotations for Streamvisor pod                                                          | `{}`                              |
 | `deployment.tolerations`               | Tolerations for Streamvisor pod assignment                                               | `[]`                              |
+| `deployment.podSecurityContext`        | Pod-level security context (e.g. fsGroup for volume permissions)                         | `{}`                              |
 | `deployment.gracePeriod`               | Seconds in which pod needs to terminate gracefully                                       | `30`                              |
 | `deployment.resources.requests.memory` | Memory request for the Streamvisor pod                                                   | `1Gi`                             |
 | `deployment.resources.requests.cpu`    | CPU request for the Streamvisor pod                                                      | `1000m`                           |
