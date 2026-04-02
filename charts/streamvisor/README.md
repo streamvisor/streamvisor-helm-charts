@@ -54,15 +54,17 @@ STREAMVISOR_PERSISTENCE_DRIVERCLASSNAME=org.postgresql.Driver
 STREAMVISOR_PERSISTENCE_USERNAME=postgres
 STREAMVISOR_PERSISTENCE_PASSWORD=postgres
 ```
+When filesystem persistence is enabled, the Deployment uses `strategy.type=Recreate` to avoid old and new pods overlapping on the same volume during upgrades.
+`ReadWriteOnce` remains the default for compatibility. `ReadWriteOncePod` can be configured for new claims on supported CSI storage when stricter single-pod access is desired.
 
-| Name                        | Description                                                                                                     | Value               |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `persistence.enabled`       | If true, persists Streamvisor data to a PersistentVolumeClaim. Please always enable this in a production setup! | `false`             |
-| `persistence.existingClaim` | If set use existing volume claim with specified name instead of provisioning one                                | `nil`               |
-| `persistence.annotations`   | Annotations for Streamvisor PersistentVolumeClaim                                                               | `{}`                |
-| `persistence.accessModes`   | Access modes for Streamvisor PersistentVolumeClaim                                                              | `["ReadWriteOnce"]` |
-| `persistence.size`          | Size for Streamvisor PersistentVolumeClaim                                                                      | `1Gi`               |
-| `persistence.storageClass`  | Storage class name for Streamvisor PersistentVolumeClaim                                                        | `nil`               |
+| Name                        | Description                                                                                                                                                            | Value               |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `persistence.enabled`       | If true, persists Streamvisor data to a PersistentVolumeClaim. Please always enable this in a production setup!                                                        | `false`             |
+| `persistence.existingClaim` | If set use existing volume claim with specified name instead of provisioning one                                                                                       | `nil`               |
+| `persistence.annotations`   | Annotations for Streamvisor PersistentVolumeClaim                                                                                                                      | `{}`                |
+| `persistence.accessModes`   | Access modes for Streamvisor PersistentVolumeClaim. Has no effect when `persistence.existingClaim` is set, and existing claims are not automatically migrated by Helm. | `["ReadWriteOnce"]` |
+| `persistence.size`          | Size for Streamvisor PersistentVolumeClaim                                                                                                                             | `1Gi`               |
+| `persistence.storageClass`  | Storage class name for Streamvisor PersistentVolumeClaim                                                                                                               | `nil`               |
 
 ### Streamvisor credentials secret parameters
 
