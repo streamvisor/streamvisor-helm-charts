@@ -7,6 +7,10 @@ metadata:
     {{- include "streamvisor.standardLabels" . | nindent 4 }}
 spec:
   replicas: 1
+  {{- if .Values.persistence.enabled }}
+  strategy:
+    type: Recreate
+  {{- end }}
   selector:
     matchLabels:
       {{- include "streamvisor.matchLabels" . | nindent 6 }}

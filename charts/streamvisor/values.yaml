@@ -86,6 +86,8 @@ config:
 ## STREAMVISOR_PERSISTENCE_USERNAME=postgres
 ## STREAMVISOR_PERSISTENCE_PASSWORD=postgres
 ## ```
+## When filesystem persistence is enabled, the Deployment uses `strategy.type=Recreate` to avoid old and new pods overlapping on the same volume during upgrades.
+## `ReadWriteOnce` remains the default for compatibility. `ReadWriteOncePod` can be configured for new claims on supported CSI storage when stricter single-pod access is desired.
 ## @descriptionEnd
 persistence:
   ## @param persistence.enabled If true, persists Streamvisor data to a PersistentVolumeClaim. Please always enable this in a production setup!
@@ -94,7 +96,7 @@ persistence:
   existingClaim:
   ## @param persistence.annotations Annotations for Streamvisor PersistentVolumeClaim
   annotations: {}
-  ## @param persistence.accessModes Access modes for Streamvisor PersistentVolumeClaim
+  ## @param persistence.accessModes Access modes for Streamvisor PersistentVolumeClaim. Has no effect when `persistence.existingClaim` is set, and existing claims are not automatically migrated by Helm.
   accessModes:
     - ReadWriteOnce
   ## @param persistence.size Size for Streamvisor PersistentVolumeClaim
